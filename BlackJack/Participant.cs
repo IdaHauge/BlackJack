@@ -29,15 +29,18 @@ namespace BlackJack
         //    return newPlayer.PlayerName;
         //}
         public abstract string DrawInitialHand(Participant participant);
+
         public Card.CardValue DrawCard()
         {
             var randomCard = new Random();
-            return (Card.CardValue)randomCard.Next(1, Enum.GetNames(typeof(Card.CardValue)).Length + 1);
+            var addedCard = (Card.CardValue)randomCard.Next((int)Card.CardValue.Two, (int)Card.CardValue.Ace + 1);
+            return addedCard;
         }
 
-        public virtual int AddToHand(Card.CardValue newCardValue)
+        public virtual void AddToHand(Card.CardValue drawnCard, Participant participant)
         {
-            return Convert.ToInt32(newCardValue);
+            var cardToAdd = (int)drawnCard;
+            participant.PlayerHand = participant.PlayerHand + cardToAdd;
         }
     }
 }
