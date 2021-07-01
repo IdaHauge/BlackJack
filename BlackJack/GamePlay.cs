@@ -14,11 +14,5 @@ namespace BlackJack
         {
             throw new System.NotImplementedException();
         }
-
-        public Card.CardValue DrawCard()
-        {
-            var randomCard = new Random();
-            return (Card.CardValue)randomCard.Next(Enum.GetNames(typeof(Card.CardValue)).Length);
-        }
     }
 }
