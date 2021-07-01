@@ -10,9 +10,9 @@ namespace BlackJack
         private bool _playerWin;
         private bool _dealerWin;
 
-        public void DrawGameMenu()
-        {
-            throw new System.NotImplementedException();
-        }
+        //public string PrintGameOutcome()
+        //{
+            
+        //}
     }
 }

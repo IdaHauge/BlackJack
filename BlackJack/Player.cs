@@ -8,25 +8,38 @@ namespace BlackJack
 {
     public class Player : Participant
     {
-        public void HitOrStay(Participant participant)
+        public int PlayersTotal { get; protected set; }
+        public bool HitOrStay(Participant participant)
         {
             bool keepDrawing = true;
+            bool busted = false;
 
             while (keepDrawing)
             {
                 Console.WriteLine("\nWould you like to hit or stay? h/s");
-                if (Console.ReadLine() == "h")
+                var input = Console.ReadLine();
+
+                if (input == "h")
                 {
                     var card = participant.DrawCard();
                     participant.AddToHand(card, participant);
                     Console.WriteLine($"You drew the card {card}. Your current total is {participant.PlayerHand}");
-
-                } else if (Console.ReadLine() == "s")
+                    if (participant.PlayerHand >= 21)
+                    {
+                        keepDrawing = false;
+                        if (participant.PlayerHand >= 22)
+                        {
+                            busted = true;
+                        }
+                    }
+                } else if (input == "s")
                 {
                     keepDrawing = false;
+                    
                 }
             }
-            //unimplemented dealer's turn method
+            PlayersTotal = participant.PlayerHand;
+            return busted;
         }
 
         public override string DrawInitialHand(Participant participant)
@@ -38,11 +51,6 @@ namespace BlackJack
             participant.AddToHand(secondCard, participant);
 
             return $"Your initial hand is {firstCard} and {secondCard}. Your total is {participant.PlayerHand}.";
-
-            //var deck = new Random();
-            //var drawnCard1 = (Card.CardValue)deck.Next(1, Enum.GetNames(typeof(Card.CardValue)).Length + 1);
-            //var drawnCard2 = (Card.CardValue)deck.Next(1, Enum.GetNames(typeof(Card.CardValue)).Length + 1);
-            //return $"Your initial hand is {drawnCard1} and {drawnCard2}. Your total is {AddToHand(drawnCard1) + AddToHand(drawnCard2)}.";
         }
     }
 }

@@ -11,7 +11,17 @@ namespace BlackJack
             Console.WriteLine(dealer.DrawInitialHand(dealer));
             var playerOne = new Player();
             Console.WriteLine(playerOne.DrawInitialHand(playerOne));
-            playerOne.HitOrStay(playerOne);
+            var busted = playerOne.HitOrStay(playerOne);
+            if (!busted)
+            {
+                dealer.DealersTurn(dealer);
+            }
+
+            //bool busted = playerOne.HitOrStay(playerOne);
+            //if (!busted) 
+            //{
+            //    dealer.DealersTurn(dealer);
+            //}
 
             //DrawGameMenu();
 

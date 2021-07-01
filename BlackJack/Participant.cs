@@ -40,7 +40,7 @@ namespace BlackJack
         public virtual void AddToHand(Card.CardValue drawnCard, Participant participant)
         {
             var cardToAdd = (int)drawnCard;
-            participant.PlayerHand = participant.PlayerHand + cardToAdd;
+            participant.PlayerHand += cardToAdd;
         }
     }
 }
