@@ -21,11 +21,11 @@
       <FileName>Card.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="BlackJack.Player">
+  <Class Name="BlackJack.Participant">
     <Position X="5.5" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAEAAIAAAAAAAAAAAAAAAQAAAAAAAAAAAgAAAgACQAA=</HashCode>
-      <FileName>Player.cs</FileName>
+      <HashCode>AAAAAgAAAAAAAAAAAAAAAAAAEAAAAAAAAgAAAgAAAgA=</HashCode>
+      <FileName>Participant.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BlackJack.GamePlay">
@@ -40,6 +40,13 @@
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Dealer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BlackJack.Player">
+    <Position X="11.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Player.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

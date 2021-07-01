@@ -5,49 +5,16 @@ using System.Text;
 
 namespace BlackJack
 {
-    public class Player
+    public class Player : Participant
     {
-        private string _playerName;
-        private int _playerHand;
 
-        public string PlayerName
+        public override string DrawInitialHand(Participant participant)
         {
-            get => _playerName;
-            set
-            {
-                if (value != null)
-                {
-                    _playerName = value;
-                }
-            }
-        }
-        public int PlayerHand
-        {
-            get => _playerHand;
-            set
-            {
-                if (value != 0)
-                {
-                    _playerHand = value;
-                }
-            }
-        }
-        //The identifier doesn't really matter and is independent of any variables you create in Main, it just needs something to compare to
-        public static string GetPlayerName(Player newPlayer)
-        {
-            Console.WriteLine("Who's playing today?");
-            newPlayer.PlayerName = Console.ReadLine();
-            return newPlayer.PlayerName;
-        }
-        public Card.CardValue PlayerDrawCard()
-        {
-            var randomCard = new Random();
-            return (Card.CardValue)randomCard.Next(Enum.GetNames(typeof(Card.CardValue)).Length);
-        }
-
-        public void AddToPlayerHand(Card.CardValue firstCardValue)
-        {
-            PlayerHand = Convert.ToInt32(firstCardValue);
+            var randomCard1 = new Random();
+            var randomCard2 = new Random();
+            var drawnCard1 = (Card.CardValue) randomCard1.Next(1, Enum.GetNames(typeof(Card.CardValue)).Length + 1);
+            var drawnCard2 = (Card.CardValue)randomCard2.Next(1, Enum.GetNames(typeof(Card.CardValue)).Length + 1);
+            return $"Your initial hand is {drawnCard1} and {drawnCard2}. Your total is {participant.AddToHand(drawnCard1) + participant.AddToHand(drawnCard2)}.";
         }
     }
 }
