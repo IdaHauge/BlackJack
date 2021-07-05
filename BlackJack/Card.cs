@@ -7,8 +7,6 @@ namespace BlackJack
 {
     public class Card
     {
-        private string _card;
-
         public enum CardValue
         {
             Two = 2,

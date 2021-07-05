@@ -23,13 +23,7 @@ namespace BlackJack
                 }
             }
         }
-        //The identifier doesn't really matter and is independent of any variables you create in Main, it just needs something to compare to
-        //public static string GetPlayerName(Player newPlayer)
-        //{
-        //    Console.WriteLine("Who's playing today?");
-        //    newPlayer.PlayerName = Console.ReadLine();
-        //    return newPlayer.PlayerName;
-        //}
+        
         public abstract string DrawInitialHand();
 
         public Card.CardValue DrawCard()
