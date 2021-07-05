@@ -48,5 +48,27 @@ namespace BlackJack
             if (drawnCard == Card.CardValue.Ace && participant.PlayerHand > 21)
                 participant.PlayerHand -= 10;
         }
+
+        public virtual void Busted(Participant participant)
+        {
+        }
+
+        public static string DetermineWinnerByScore(Participant dealer, Participant player)
+        {
+            int dealerscore = dealer.DealersTotal;
+            int playerscore = player.PlayersTotal;
+
+            if (dealerscore < playerscore)
+            {
+                return $"You win! Your score was {playerscore}, and the dealer's score is {dealerscore}.";
+            } else if (dealerscore > playerscore)
+            {
+                return $"You lose :( The dealer's score is {dealerscore}, your score is {playerscore}.";
+            }
+            else
+            {
+                return $"So close! But since you both have the same score of {playerscore}, the dealer takes this one.";
+            }
+        }
     }
 }

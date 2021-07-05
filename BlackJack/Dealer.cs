@@ -20,17 +20,28 @@ namespace BlackJack
             return $"The dealer's initial hand is the hidden hole card and {firstCard}.";
         }
 
-        public void DealersTurn(Participant participant)
+        public bool DealersTurn(Participant participant)
         {
+            var busted = false;
             Console.WriteLine($"\nThe dealer's hole card is {HoleCard}. The dealer's current total is {participant.PlayerHand}.");
             while (participant.PlayerHand < 17)
             {
                 var card = participant.DrawCard();
                 participant.AddToHand(card, participant);
                 Console.WriteLine($"The dealer drew the card {card}. The dealer's current total is {participant.PlayerHand}");
+                if (participant.PlayerHand > 21)
+                {
+                    busted = true;
+                }
             }
-
             DealersTotal = participant.PlayerHand;
+
+            return busted;
+        }
+
+        public override void Busted(Participant participant)
+        {
+            Console.WriteLine($"Yay! The dealer busted out with a score of {participant.PlayerHand}, and you win!");
         }
     }
 }

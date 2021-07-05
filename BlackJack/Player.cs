@@ -8,6 +8,7 @@ namespace BlackJack
 {
     public class Player : Participant
     {
+        public bool HasBlackJack { get; private set; }
          public bool HitOrStay(Participant participant)
         {
             bool keepDrawing = true;
@@ -15,6 +16,8 @@ namespace BlackJack
 
             while (keepDrawing)
             {
+                if (HasBlackJack)
+                    break;
                 Console.WriteLine("\nWould you like to hit or stay? h/s");
                 var input = Console.ReadLine();
 
@@ -51,10 +54,16 @@ namespace BlackJack
 
             if (participant.PlayerHand == 21)
             {
-                return $"You won! (Your total is {participant.PlayerHand}, so you have Blackjack.";
+                HasBlackJack = true;
+                return $"Your initial hand is {firstCard} and {secondCard}.\nYou won! (Your total is {participant.PlayerHand}, so you have Blackjack).";
             }
 
             return $"Your initial hand is {firstCard} and {secondCard}. Your total is {participant.PlayerHand}.";
+        }
+
+        public override void Busted(Participant participant)
+        {
+            Console.WriteLine($"Oof! You went over 21 and were busted. (Your total score is {participant.PlayerHand}).");
         }
 
         //public void CheckIfBlackjack(Participant participant, int hand)
