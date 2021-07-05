@@ -45,6 +45,8 @@ namespace BlackJack
         {
             var cardToAdd = (int)drawnCard;
             participant.PlayerHand += cardToAdd;
+            if (drawnCard == Card.CardValue.Ace && participant.PlayerHand > 21)
+                participant.PlayerHand = participant.PlayerHand - 10;
         }
     }
 }
