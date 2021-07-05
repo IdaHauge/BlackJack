@@ -31,7 +31,7 @@ namespace BlackJack
 
                 Console.WriteLine(initialHand);
                 
-                var playerBusted = playerOne.HitOrStay(playerOne);
+                var playerBusted = playerOne.HitOrStay();
                 if (playerBusted)
                 {
                     playerOne.Busted();

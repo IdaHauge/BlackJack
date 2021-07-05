@@ -9,7 +9,7 @@ namespace BlackJack
     public class Player : Participant
     {
         public bool HasBlackJack { get; private set; }
-         public bool HitOrStay(Participant participant)
+         public bool HitOrStay()
         {
             bool keepDrawing = true;
             bool busted = false;
@@ -23,13 +23,13 @@ namespace BlackJack
 
                 if (input == "h")
                 {
-                    var card = participant.DrawCard();
-                    participant.AddToHand(card);
-                    Console.WriteLine($"You drew the card {card}. Your current total is {participant.PlayerHand}.");
-                    if (participant.PlayerHand >= 21)
+                    var card = DrawCard();
+                    AddToHand(card);
+                    Console.WriteLine($"You drew the card {card}. Your current total is {PlayerHand}.");
+                    if (PlayerHand >= 21)
                     {
                         keepDrawing = false;
-                        if (participant.PlayerHand >= 22)
+                        if (PlayerHand >= 22)
                         {
                             busted = true;
                         }
@@ -40,7 +40,7 @@ namespace BlackJack
                     
                 }
             }
-            PlayersTotal = participant.PlayerHand;
+            PlayersTotal = PlayerHand;
             return busted;
         }
 
