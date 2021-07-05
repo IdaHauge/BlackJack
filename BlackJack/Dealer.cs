@@ -8,8 +8,6 @@ namespace BlackJack
     public class Dealer : Participant
     {
         public Card.CardValue HoleCard { get; protected set; }
-        public int DealersTotal { get; protected set; }
-
         public override string DrawInitialHand(Participant participant)
         {
             var firstCard = participant.DrawCard();

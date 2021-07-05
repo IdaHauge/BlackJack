@@ -9,7 +9,9 @@ namespace BlackJack
     {
         private int _playerHand;
 
-        
+        public int DealersTotal { get; protected set; }
+        public int PlayersTotal { get; protected set; }
+
         public int PlayerHand
         {
             get => _playerHand;
@@ -34,6 +36,8 @@ namespace BlackJack
         {
             var randomCard = new Random();
             var addedCard = (Card.CardValue)randomCard.Next((int)Card.CardValue.Two, (int)Card.CardValue.Ace + 1);
+            //Add method to check if addedCard = Ace, and if adding the Ace would put the player hand over 21 (possibly an abstract in Participant)
+            //Might fit better to call it inside the AddToHand method.
             return addedCard;
         }
 

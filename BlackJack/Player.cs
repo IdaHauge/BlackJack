@@ -8,8 +8,7 @@ namespace BlackJack
 {
     public class Player : Participant
     {
-        public int PlayersTotal { get; protected set; }
-        public bool HitOrStay(Participant participant)
+         public bool HitOrStay(Participant participant)
         {
             bool keepDrawing = true;
             bool busted = false;
