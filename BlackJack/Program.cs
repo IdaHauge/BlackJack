@@ -7,15 +7,26 @@ namespace BlackJack
     {
         static void Main(string[] args)
         {
-            var dealer = new Dealer();
-            Console.WriteLine(dealer.DrawInitialHand(dealer));
-            var playerOne = new Player();
-            Console.WriteLine(playerOne.DrawInitialHand(playerOne));
-            var busted = playerOne.HitOrStay(playerOne);
-            if (!busted)
+            var keepPlaying = true;
+
+            while (keepPlaying)
             {
-                dealer.DealersTurn(dealer);
+                var dealer = new Dealer();
+                Console.WriteLine(dealer.DrawInitialHand(dealer));
+                var playerOne = new Player();
+                var initialHand = playerOne.DrawInitialHand(playerOne);
+                if (initialHand.Contains("Blackjack"))
+                {
+                    Console.WriteLine(initialHand);
+                    break;
+                }
+                var busted = playerOne.HitOrStay(playerOne);
+                if (!busted)
+                {
+                    dealer.DealersTurn(dealer);
+                }
             }
+            
 
             //bool busted = playerOne.HitOrStay(playerOne);
             //if (!busted) 

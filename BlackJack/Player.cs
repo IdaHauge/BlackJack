@@ -49,7 +49,21 @@ namespace BlackJack
             participant.AddToHand(firstCard, participant);
             participant.AddToHand(secondCard, participant);
 
+            if (participant.PlayerHand == 21)
+            {
+                return $"You won! (Your total is {participant.PlayerHand}, so you have Blackjack.";
+            }
+
             return $"Your initial hand is {firstCard} and {secondCard}. Your total is {participant.PlayerHand}.";
         }
+
+        //public void CheckIfBlackjack(Participant participant, int hand)
+        //{
+        //    hand = participant.PlayerHand;
+        //    if (hand == 21)
+        //    {
+
+        //    } else
+        //}
     }
 }
