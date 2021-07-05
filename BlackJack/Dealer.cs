@@ -28,7 +28,7 @@ namespace BlackJack
             {
                 var card = participant.DrawCard();
                 participant.AddToHand(card, participant);
-                Console.WriteLine($"The dealer drew the card {card}. The dealer's current total is {participant.PlayerHand}");
+                Console.WriteLine($"The dealer drew the card {card}. The dealer's current total is {participant.PlayerHand}.");
                 if (participant.PlayerHand > 21)
                 {
                     busted = true;
@@ -39,9 +39,11 @@ namespace BlackJack
             return busted;
         }
 
-        public override void Busted(Participant participant)
+        public void Busted()
         {
-            Console.WriteLine($"Yay! The dealer busted out with a score of {participant.PlayerHand}, and you win!");
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            Console.WriteLine($"Yay! The dealer busted out with a score of {PlayerHand}, and you win!");
+            Console.ResetColor();
         }
     }
 }

@@ -36,8 +36,6 @@ namespace BlackJack
         {
             var randomCard = new Random();
             var addedCard = (Card.CardValue)randomCard.Next((int)Card.CardValue.Two, (int)Card.CardValue.Ace + 1);
-            //Add method to check if addedCard = Ace, and if adding the Ace would put the player hand over 21 (possibly an abstract in Participant)
-            //Might fit better to call it inside the AddToHand method.
             return addedCard;
         }
 
@@ -49,8 +47,16 @@ namespace BlackJack
                 participant.PlayerHand -= 10;
         }
 
-        public virtual void Busted(Participant participant)
+        public bool WantsToKeepPlaying()
         {
+            Console.WriteLine("\nWould you like to play again?");
+            var keepPlaying = Console.ReadKey().KeyChar;
+            if (keepPlaying == 'y')
+            {
+                return true;
+            }
+            else
+                return false;
         }
 
         public static string DetermineWinnerByScore(Participant dealer, Participant player)
@@ -60,15 +66,25 @@ namespace BlackJack
 
             if (dealerscore < playerscore)
             {
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
                 return $"You win! Your score was {playerscore}, and the dealer's score is {dealerscore}.";
             } else if (dealerscore > playerscore)
             {
+                Console.ForegroundColor = ConsoleColor.DarkRed;
                 return $"You lose :( The dealer's score is {dealerscore}, your score is {playerscore}.";
             }
             else
             {
+                Console.ForegroundColor = ConsoleColor.DarkRed;
                 return $"So close! But since you both have the same score of {playerscore}, the dealer takes this one.";
             }
+        }
+
+        public void ResetTotals()
+        {
+            PlayersTotal = 0;
+            DealersTotal = 0;
+            _playerHand = 0;
         }
     }
 }

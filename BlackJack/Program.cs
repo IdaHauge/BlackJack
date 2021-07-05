@@ -8,17 +8,25 @@ namespace BlackJack
         static void Main(string[] args)
         {
             var keepPlaying = true;
+            var dealer = new Dealer();
+            var playerOne = new Player();
 
             while (keepPlaying)
             {
-                var dealer = new Dealer();
+                RestartGame:
+                Console.Clear();
+
                 Console.WriteLine(dealer.DrawInitialHand(dealer));
-                var playerOne = new Player();
                 var initialHand = playerOne.DrawInitialHand(playerOne);
                 if (playerOne.HasBlackJack)
                 {
                     Console.WriteLine(initialHand);
-                    break;
+                    if (playerOne.WantsToKeepPlaying())
+                    {
+                        playerOne.ResetTotals();
+                        dealer.ResetTotals();
+                        goto RestartGame;
+                    }
                 }
 
                 Console.WriteLine(initialHand);
@@ -26,35 +34,36 @@ namespace BlackJack
                 var playerBusted = playerOne.HitOrStay(playerOne);
                 if (playerBusted)
                 {
-                    playerOne.Busted(playerOne);
-                    break;
+                    playerOne.Busted();
+                    if (playerOne.WantsToKeepPlaying())
+                    {
+                        playerOne.ResetTotals();
+                        dealer.ResetTotals();
+                        goto RestartGame;
+                    }
                 } 
                 
                 var dealerBusted = dealer.DealersTurn(dealer);
                 if (dealerBusted)
                 {
-                    dealer.Busted(dealer);
-                    break;
+                    dealer.Busted();
+                    if (playerOne.WantsToKeepPlaying())
+                    {
+                        playerOne.ResetTotals();
+                        dealer.ResetTotals();
+                        goto RestartGame;
+                    }
                 }
-                
-                Participant.DetermineWinnerByScore(dealer, playerOne);
-                
-                
+                Console.WriteLine(Participant.DetermineWinnerByScore(dealer, playerOne));
+                Console.ResetColor();
+                if (playerOne.WantsToKeepPlaying())
+                {
+                    playerOne.ResetTotals();
+                    dealer.ResetTotals();
+                    goto RestartGame;
+                }
+                else keepPlaying = false;
             }
-            
-
-            //bool busted = playerOne.HitOrStay(playerOne);
-            //if (!busted) 
-            //{
-            //    dealer.DealersTurn(dealer);
-            //}
-
-            //DrawGameMenu();
-
-            //var firstCard = playerOne.DrawCard();
-            //playerOne.AddToHand(firstCard);
-            //Console.WriteLine("You drew the card {0}.", firstCard);
-            //Console.WriteLine("{0}'s current hand total is: {1}.", playerOne.PlayerName, playerOne.PlayerHand);
         }
     }
 }

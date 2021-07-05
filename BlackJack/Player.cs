@@ -25,7 +25,7 @@ namespace BlackJack
                 {
                     var card = participant.DrawCard();
                     participant.AddToHand(card, participant);
-                    Console.WriteLine($"You drew the card {card}. Your current total is {participant.PlayerHand}");
+                    Console.WriteLine($"You drew the card {card}. Your current total is {participant.PlayerHand}.");
                     if (participant.PlayerHand >= 21)
                     {
                         keepDrawing = false;
@@ -55,24 +55,18 @@ namespace BlackJack
             if (participant.PlayerHand == 21)
             {
                 HasBlackJack = true;
-                return $"Your initial hand is {firstCard} and {secondCard}.\nYou won! (Your total is {participant.PlayerHand}, so you have Blackjack).";
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                return $"Your initial hand is {firstCard} and {secondCard}.\nYou win! (Your total is {participant.PlayerHand}, so you have Blackjack).";
             }
 
             return $"Your initial hand is {firstCard} and {secondCard}. Your total is {participant.PlayerHand}.";
         }
 
-        public override void Busted(Participant participant)
+        public void Busted()
         {
-            Console.WriteLine($"Oof! You went over 21 and were busted. (Your total score is {participant.PlayerHand}).");
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.WriteLine($"Oof! You went over 21 and were busted. (Your total score is {PlayerHand}).");
+            Console.ResetColor();
         }
-
-        //public void CheckIfBlackjack(Participant participant, int hand)
-        //{
-        //    hand = participant.PlayerHand;
-        //    if (hand == 21)
-        //    {
-
-        //    } else
-        //}
     }
 }
