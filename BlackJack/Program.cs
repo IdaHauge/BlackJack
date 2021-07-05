@@ -16,8 +16,8 @@ namespace BlackJack
                 RestartGame:
                 Console.Clear();
 
-                Console.WriteLine(dealer.DrawInitialHand(dealer));
-                var initialHand = playerOne.DrawInitialHand(playerOne);
+                Console.WriteLine(dealer.DrawInitialHand());
+                var initialHand = playerOne.DrawInitialHand();
                 if (playerOne.HasBlackJack)
                 {
                     Console.WriteLine(initialHand);
@@ -43,7 +43,7 @@ namespace BlackJack
                     }
                 } 
                 
-                var dealerBusted = dealer.DealersTurn(dealer);
+                var dealerBusted = dealer.DealersTurn();
                 if (dealerBusted)
                 {
                     dealer.Busted();

@@ -8,33 +8,33 @@ namespace BlackJack
     public class Dealer : Participant
     {
         public Card.CardValue HoleCard { get; protected set; }
-        public override string DrawInitialHand(Participant participant)
+        public override string DrawInitialHand()
         {
-            var firstCard = participant.DrawCard();
-            var secondCard = participant.DrawCard();
+            var firstCard = DrawCard();
+            var secondCard = DrawCard();
             HoleCard = secondCard;
 
-            participant.AddToHand(firstCard, participant);
-            participant.AddToHand(secondCard, participant);
+            AddToHand(firstCard);
+            AddToHand(secondCard);
 
             return $"The dealer's initial hand is the hidden hole card and {firstCard}.";
         }
 
-        public bool DealersTurn(Participant participant)
+        public bool DealersTurn()
         {
             var busted = false;
-            Console.WriteLine($"\nThe dealer's hole card is {HoleCard}. The dealer's current total is {participant.PlayerHand}.");
-            while (participant.PlayerHand < 17)
+            Console.WriteLine($"\nThe dealer's hole card is {HoleCard}. The dealer's current total is {PlayerHand}.");
+            while (PlayerHand < 17)
             {
-                var card = participant.DrawCard();
-                participant.AddToHand(card, participant);
-                Console.WriteLine($"The dealer drew the card {card}. The dealer's current total is {participant.PlayerHand}.");
-                if (participant.PlayerHand > 21)
+                var card = DrawCard();
+                AddToHand(card);
+                Console.WriteLine($"The dealer drew the card {card}. The dealer's current total is {PlayerHand}.");
+                if (PlayerHand > 21)
                 {
                     busted = true;
                 }
             }
-            DealersTotal = participant.PlayerHand;
+            DealersTotal = PlayerHand;
 
             return busted;
         }

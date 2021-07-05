@@ -30,7 +30,7 @@ namespace BlackJack
         //    newPlayer.PlayerName = Console.ReadLine();
         //    return newPlayer.PlayerName;
         //}
-        public abstract string DrawInitialHand(Participant participant);
+        public abstract string DrawInitialHand();
 
         public Card.CardValue DrawCard()
         {
@@ -39,12 +39,12 @@ namespace BlackJack
             return addedCard;
         }
 
-        public virtual void AddToHand(Card.CardValue drawnCard, Participant participant)
+        public virtual void AddToHand(Card.CardValue drawnCard)
         {
             var cardToAdd = (int)drawnCard;
-            participant.PlayerHand += cardToAdd;
-            if (drawnCard == Card.CardValue.Ace && participant.PlayerHand > 21)
-                participant.PlayerHand -= 10;
+            PlayerHand += cardToAdd;
+            if (drawnCard == Card.CardValue.Ace && PlayerHand > 21)
+                PlayerHand -= 10;
         }
 
         public bool WantsToKeepPlaying()
