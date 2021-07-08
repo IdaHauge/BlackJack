@@ -43,7 +43,7 @@ namespace BlackJack
 
         public bool WantsToKeepPlaying()
         {
-            Console.WriteLine("\nWould you like to play again?");
+            Console.WriteLine("\nWould you like to play again? [y/n]");
             var keepPlaying = Console.ReadKey().KeyChar;
             if (keepPlaying == 'y')
             {

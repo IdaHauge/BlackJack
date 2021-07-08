@@ -27,6 +27,7 @@ namespace BlackJack
                         dealer.ResetTotals();
                         goto RestartGame;
                     }
+                    else break;
                 }
 
                 Console.WriteLine(initialHand);
@@ -41,6 +42,7 @@ namespace BlackJack
                         dealer.ResetTotals();
                         goto RestartGame;
                     }
+                    else break;
                 } 
                 
                 var dealerBusted = dealer.DealersTurn();
@@ -53,6 +55,7 @@ namespace BlackJack
                         dealer.ResetTotals();
                         goto RestartGame;
                     }
+                    else break;
                 }
                 Console.WriteLine(Participant.DetermineWinnerByScore(dealer, playerOne));
                 Console.ResetColor();
@@ -62,7 +65,7 @@ namespace BlackJack
                     dealer.ResetTotals();
                     goto RestartGame;
                 }
-                else keepPlaying = false;
+                else break;
             }
         }
     }
