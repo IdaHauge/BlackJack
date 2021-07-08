@@ -25,11 +25,11 @@ namespace BlackJack
                 {
                     var card = DrawCard();
                     AddToHand(card);
-                    Console.WriteLine($"You drew the card {card}. Your current total is {PlayerHand}.");
-                    if (PlayerHand >= 21)
+                    Console.WriteLine($"You drew the card {card}. Your current total is {PlayersTotal}.");
+                    if (PlayersTotal >= 21)
                     {
                         keepDrawing = false;
-                        if (PlayerHand >= 22)
+                        if (PlayersTotal >= 22)
                         {
                             busted = true;
                         }
@@ -40,7 +40,6 @@ namespace BlackJack
                     
                 }
             }
-            PlayersTotal = PlayerHand;
             return busted;
         }
 
@@ -52,20 +51,20 @@ namespace BlackJack
             AddToHand(firstCard);
             AddToHand(secondCard);
 
-            if (PlayerHand == 21)
+            if (PlayersTotal == 21)
             {
                 HasBlackJack = true;
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
-                return $"Your initial hand is {firstCard} and {secondCard}.\nYou win! (Your total is {PlayerHand}, so you have Blackjack).";
+                return $"Your initial hand is {firstCard} and {secondCard}.\nYou win! (Your total is {PlayersTotal}, so you have Blackjack).";
             }
 
-            return $"Your initial hand is {firstCard} and {secondCard}. Your total is {PlayerHand}.";
+            return $"Your initial hand is {firstCard} and {secondCard}. Your total is {PlayersTotal}.";
         }
 
         public void Busted()
         {
             Console.ForegroundColor = ConsoleColor.DarkRed;
-            Console.WriteLine($"Oof! You went over 21 and were busted. (Your total score is {PlayerHand}).");
+            Console.WriteLine($"Oof! You went over 21 and were busted. (Your total score is {PlayersTotal}).");
             Console.ResetColor();
         }
     }

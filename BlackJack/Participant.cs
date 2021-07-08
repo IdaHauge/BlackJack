@@ -7,17 +7,15 @@ namespace BlackJack
 {
     public abstract class Participant
     {
-        private int _playerHand;
-
-        public int DealersTotal { get; protected set; }
+        private List<Card.CardValue> _playerHand = new List<Card.CardValue>();
         public int PlayersTotal { get; protected set; }
 
-        public int PlayerHand
+        public List<Card.CardValue> PlayerHand
         {
             get => _playerHand;
             set
             {
-                if (value != 0)
+                if (value != null)
                 {
                     _playerHand = value;
                 }
@@ -36,9 +34,12 @@ namespace BlackJack
         public virtual void AddToHand(Card.CardValue drawnCard)
         {
             var cardToAdd = (int)drawnCard;
-            PlayerHand += cardToAdd;
-            if (drawnCard == Card.CardValue.Ace && PlayerHand > 21)
-                PlayerHand -= 10;
+            PlayerHand.Add(drawnCard);
+            PlayersTotal += cardToAdd;
+            if (PlayerHand.Contains(Card.CardValue.Ace) && PlayersTotal > 21)
+            {
+                PlayersTotal -= 10;
+            }
         }
 
         public bool WantsToKeepPlaying()
@@ -55,7 +56,7 @@ namespace BlackJack
 
         public static string DetermineWinnerByScore(Participant dealer, Participant player)
         {
-            int dealerscore = dealer.DealersTotal;
+            int dealerscore = dealer.PlayersTotal;
             int playerscore = player.PlayersTotal;
 
             if (dealerscore < playerscore)
@@ -77,8 +78,7 @@ namespace BlackJack
         public void ResetTotals()
         {
             PlayersTotal = 0;
-            DealersTotal = 0;
-            _playerHand = 0;
+            _playerHand.Clear();
         }
     }
 }
